@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by matthewletter on 10/4/14.
@@ -17,15 +14,15 @@ public class StringChain {
         this.ORDER = order;
     }
 
-    public String[] generate(int count, Random rand) {
-        String[] returnString = new String[count];
+    public List<String> generate(int count, Random rand) {
+        List<String> returnString = new ArrayList<String>(10);
         Prefix currentKey;
         String keyString = "";
         for (int i = 0; i < ORDER; i++) {
             keyString += NOT_A_WORD;
         }
         currentKey = new Prefix(keyString);
-        returnString[0] = map.get(currentKey).getSuffix(rand);
+        returnString.add(map.get(currentKey).getSuffix(rand));
 
         for (int i = 1; i<count && i < ORDER; i++) {
             keyString = "";
@@ -33,19 +30,19 @@ public class StringChain {
                 keyString += NOT_A_WORD;
             }
             for (int j = 0; j < i; j++) {
-                keyString += returnString[j];
+                keyString += returnString.get(j);
             }
             currentKey = new Prefix(keyString);
-            returnString[i] = map.get(currentKey).getSuffix(rand);
+            returnString.add(map.get(currentKey).getSuffix(rand));
         }
 
         for (int i = ORDER; i < count; i++) {
             keyString = "";
             for (int j = i-ORDER; j < i; j++) {
-                keyString += returnString[j];
+                keyString += returnString.get(j);
             }
             currentKey = new Prefix(keyString);
-            returnString[i] = map.get(currentKey).getSuffix(rand);
+            returnString.add(map.get(currentKey).getSuffix(rand));
         }
         return returnString;
     }
