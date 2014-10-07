@@ -29,7 +29,7 @@ public class StringChain {
 
         for (int i = 1; i<count && i < ORDER; i++) {
             keyString = "";
-            for (int j = ORDER; j > i ; j--) {
+            for (int j = 0; j < ORDER-i ; j++) {
                 keyString += NOT_A_WORD;
             }
             for (int j = 0; j < i; j++) {
